@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<form id= "form"action="/api/bookings/reserve" method="post">
+		<label>event id:</label>
+		<input id="event_id" name="event_id" placeholder="2">
+		<label>user id:</label>
+		<input id="user_id" name="user_id" placeholder="1">
+		<input type="submit" value="submit">
+	</form>
+</body>
+<script>
+	document.getElementById('form').addEventListener('submit', async (e)=>{
+		e.preventDefault()
+
+		var result = await fetch('/api/bookings/reserve', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				event_id: document.getElementById('event_id').value,
+				user_id: document.getElementById('user_id').value
+			})
+		})
+	})
+</script>
+</html>
